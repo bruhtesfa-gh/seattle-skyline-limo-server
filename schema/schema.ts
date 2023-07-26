@@ -1,104 +1,78 @@
 import mongoose from "mongoose";
-// User schema
+// Define the User schema
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    email: {
-        type: String,
-        unique: true
-    },
+    img: { type: String, default: '' },
+    email: { type: String, unique: true },
     password: String,
-    blogs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Blog'
-    }],
-    vehicles: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Vehicle'
-    }]
-}, {
-    timestamps: true
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
 });
 
-// Blog schema
+// Define the Blog schema
 const blogSchema = new mongoose.Schema({
     title: String,
+    img: String,
     content: String,
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
-}, {
-    timestamps: true
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
 });
 
-// Vehicle schema 
+// Define the Vehicle schema
 const vehicleSchema = new mongoose.Schema({
     name: String,
     model: String,
-    type: {
-        type: String,
-        enum: ['SUV', 'BUS', 'VAN', 'SEDAN']
-    },
+    img: String,
+    description: String,
+    speed: Number,
+    automatic: { type: Number, default: 1 },
+    heatedSeat: { type: Number, default: 1 },
+    gpsNavigation: { type: Number, default: 1 },
     pricePerDay: Number,
+    type: String, // VehicleType enum will be represented as a String
     passengerSize: Number,
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
-}, {
-    timestamps: true
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
 });
 
-// Reservation (Book) schema
+// Define the Book schema
 const bookSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
+    fromAddress: String,
+    toAddress: String,
     email: String,
     phoneNumber: String,
-    vehicle: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Vehicle'
-    },
-    status: {
-        type: String,
-        enum: ['PENDING', 'COMPLETED', 'REJECTED'],
-        default: 'PENDING'
-    }
-}, {
-    timestamps: true
+    luggageCount: Number,
+    personCount: Number,
+    journeyDate: Date,
+    description: String,
+    status: String, // ReservationStatus enum will be represented as a String
+    vehicleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle' },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
 });
 
-// Comment schema
+// Define the Comment schema
 const commentSchema = new mongoose.Schema({
     fullName: String,
     email: String,
     comment: String,
-    blog: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Blog'
-    }
-}, {
-    timestamps: true
+    blogId: { type: mongoose.Schema.Types.ObjectId, ref: 'Blog' },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
 });
 
-
-// User model
+// Create the models
 const User = mongoose.model('User', userSchema);
-export { User }
-
-// Blog model 
 const Blog = mongoose.model('Blog', blogSchema);
-export { Blog }
-
-// Vehicle model
 const Vehicle = mongoose.model('Vehicle', vehicleSchema);
-export { Vehicle }
-
-// Book model
 const Book = mongoose.model('Book', bookSchema);
-export { Book }
-
-// Comment model
 const Comment = mongoose.model('Comment', commentSchema);
-export { Comment }
+
+export { User, Blog, Vehicle, Book, Comment };
