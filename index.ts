@@ -7,6 +7,9 @@ import blogRouter from './routers/blog';
 import bookRouter from './routers/book';
 import userRouter from './routers/user';
 import vehicleRouter from './routers/vehicle';
+import { getStats } from './controllers/stat';
+import { authMiddleware } from './middlewares/auth';
+import { me } from './controllers/user';
 
 const app = express();
 
@@ -19,6 +22,8 @@ app.use("/blog", blogRouter);
 app.use("/book", bookRouter);
 app.use("/user", userRouter);
 app.use("/vehicle", vehicleRouter);
+app.get("/stat", getStats);
+app.get("/me", authMiddleware, me);
 
 // etc...
 connectDB().then(() => {

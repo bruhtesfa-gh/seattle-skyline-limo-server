@@ -76,3 +76,19 @@ export const updateProfile = [
         }
     },
 ];
+
+export const me = async (req: any, res: any, next: any) => {
+    try {
+        const user = await User.findById(req.user?.id).select(
+            userPropertiestWithPassword
+        );
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        res.send(user);
+    } catch (err: any) {
+        return res.status(500).send(err.message);
+    }
+}
