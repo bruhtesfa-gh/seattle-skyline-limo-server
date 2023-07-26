@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './db/db';
 import authRouter from './routers/authrouter';
 import blogRouter from './routers/blog';
+import bookRouter from './routers/book';
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(express.json());
 
 app.use('/auth', authRouter);
 app.use("/blog", blogRouter);
-
+app.use("/book", bookRouter);
 // etc...
 connectDB().then(() => {
     app.listen(process.env.PORT || 4000, () => {
