@@ -1,8 +1,8 @@
 // Import the Mongoose models and other required modules
 import { Blog } from "../schema/schema"; // Assuming you have defined the Mongoose model for Blog
 
-import upload from "../utils/multer";
 import { BlogPostschema, BlogUpdateschema } from "../validation/blog";
+import upload from "../utils/multer";
 import { rm } from "fs/promises";
 import path from "path";
 // The rest of the imports and setup remains the same

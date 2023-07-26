@@ -1,4 +1,9 @@
+import { string } from "joi";
 import mongoose from "mongoose";
+
+const VehicleType = ["SUV", "BUS", "VAN", "SEDAN"]
+const ReservationStatus = ["PENDING", "COMPLETED", "REJECTED"]
+
 // Define the User schema
 const userSchema = new mongoose.Schema({
     firstName: String,
@@ -32,7 +37,7 @@ const vehicleSchema = new mongoose.Schema({
     heatedSeat: { type: Number, default: 1 },
     gpsNavigation: { type: Number, default: 1 },
     pricePerDay: Number,
-    type: String, // VehicleType enum will be represented as a String
+    type: { type: String, enum: VehicleType }, // VehicleType enum will be represented as a String
     passengerSize: Number,
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
@@ -52,7 +57,7 @@ const bookSchema = new mongoose.Schema({
     personCount: Number,
     journeyDate: Date,
     description: String,
-    status: String, // ReservationStatus enum will be represented as a String
+    status: { type: String, enum: ReservationStatus }, // ReservationStatus enum will be represented as a String
     vehicleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle' },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },

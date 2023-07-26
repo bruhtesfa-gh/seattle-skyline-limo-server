@@ -6,6 +6,7 @@ import authRouter from './routers/authrouter';
 import blogRouter from './routers/blog';
 import bookRouter from './routers/book';
 import userRouter from './routers/user';
+import vehicleRouter from './routers/vehicle';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use('/auth', authRouter);
 app.use("/blog", blogRouter);
 app.use("/book", bookRouter);
 app.use("/user", userRouter);
+app.use("/vehicle", vehicleRouter);
 // etc...
 connectDB().then(() => {
     app.listen(process.env.PORT || 4000, () => {
