@@ -1,5 +1,4 @@
-import express, { Request, Response } from 'express';
-import mongoose from 'mongoose';
+import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './db/db';
 import authRouter from './routers/authrouter';
@@ -10,11 +9,12 @@ import vehicleRouter from './routers/vehicle';
 import { getStats } from './controllers/stat';
 import { authMiddleware } from './middlewares/auth';
 import { me } from './controllers/user';
-
+import path from 'path';
 const app = express();
 
 dotenv.config();
 
+app.use(express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 
 app.use('/auth', authRouter);

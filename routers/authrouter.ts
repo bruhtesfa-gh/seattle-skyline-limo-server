@@ -14,5 +14,6 @@ export default authRouter;
     "firstName": "Lidiya",
     "lastName": "Gelaw",
     "email": "skylinelimo0@gmail.com",
+    "img": ""
     "password": "Lidiya@1234"
 }'`
