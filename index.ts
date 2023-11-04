@@ -28,6 +28,7 @@ app.use(
       "http://localhost:5173",
       "127.0.0.1:3000",
       "https://seattle-limos.onrender.com",
+      "https://seattle-skyline-limo-admin.netlify.app/",
       "http://localhost",
       "127.0.0.1"
     ],
